@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-import time
-import os
+import sys
 
 
 class RSSReader:
@@ -19,7 +18,7 @@ class RSSReader:
 
         if not channel.find("title"):
             return
-        
+
         print("Page Title:", channel.title.text)
         print("Description: ", channel.description.text)
         print("Link: ", channel.link.text)
@@ -36,5 +35,8 @@ class RSSReader:
 
 
 if __name__ == "__main__":
-    RSSReader("http://rss.cnn.com/rss/cnn_topstories.rss")
-    
+    args = sys.argv
+    urls = args[1:]
+
+    for url in urls:
+        RSSReader(url)
